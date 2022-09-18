@@ -23,7 +23,11 @@ serde = { version = "1.0.143", optional = true, features = ["derive"] }
 smallvec = "1.9.0"
 
 # Local
-pallet-template = { path = "../pallets/template", default-features = false }
+pallet-depositdispute = { path = "../pallets/depositdispute", default-features = false }
+pallet-dexgraph = { path = "../pallets/dexgraph", default-features = false }
+pallet-dexmint = { path = "../pallets/dexmint", default-features = false }
+pallet-frontendstore = { path = "../pallets/frontendstore", default-features = false }
+pallet-invoicebook = { path = "../pallets/invoicebook", default-features = false }
 
 # Substrate
 frame-benchmarking = { git = "https://github.com/paritytech/substrate", default-features = false, optional = true, branch = "polkadot-v0.9.28" }
@@ -102,7 +106,11 @@ std = [
 	"pallet-collator-selection/std",
 	"pallet-session/std",
 	"pallet-sudo/std",
-	"pallet-template/std",
+	"pallet-depositdispute/std",
+	"pallet-dexgraph/std",
+	"pallet-dexmint/std",
+	"pallet-frontendstore/std",
+	"pallet-invoicebook/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
@@ -135,7 +143,11 @@ runtime-benchmarks = [
 	"frame-system/runtime-benchmarks",
 	"pallet-balances/runtime-benchmarks",
 	"pallet-collator-selection/runtime-benchmarks",
-	"pallet-template/runtime-benchmarks",
+	"pallet-depositdispute/runtime-benchmarks",
+	"pallet-dexgraph/runtime-benchmarks",
+	"pallet-dexmint/runtime-benchmarks",
+	"pallet-frontendstore/runtime-benchmarks",
+	"pallet-invoicebook/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
 	"pallet-xcm/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",

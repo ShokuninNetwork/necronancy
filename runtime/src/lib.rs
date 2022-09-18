@@ -54,8 +54,11 @@ use weights::{BlockExecutionWeight, ExtrinsicBaseWeight, RocksDbWeight};
 use xcm::latest::prelude::BodyId;
 use xcm_executor::XcmExecutor;
 
-/// Import the template pallet.
-pub use pallet_template;
+pub use pallet_depositdispute;
+pub use pallet_dexgraph;
+pub use pallet_dexmint;
+pub use pallet_frontendstore;
+pub use pallet_invoicebook;
 
 /// Alias to 512-bit hash when used in the context of a transaction signature on the chain.
 pub type Signature = MultiSignature;
@@ -454,8 +457,46 @@ impl pallet_collator_selection::Config for Runtime {
 	type WeightInfo = ();
 }
 
-/// Configure the pallet template in pallets/template.
-impl pallet_template::Config for Runtime {
+impl pallet_depositdispute::Config for Runtime {
+	type Event = Event;
+	type Balance = Balance;
+	type IdType = u64;
+	type Currency = Balances;
+}
+
+impl pallet_dexgraph::Config for Runtime {
+	type Event = Event;
+	type Currency = Balances;
+}
+
+parameter_types! {
+	pub const MaxTokensPerAccount: u32 = 1000;
+	pub const MaxMetadataSize: u32 = 1024 * 2;
+}
+
+impl pallet_dexmint::Config for Runtime {
+	type Event = Event;
+	type NativeCurrency = Balances;
+	type Balance = Balance;
+	type MaxTokensPerAccount = MaxTokensPerAccount;
+	type MaxMetadataSize = MaxMetadataSize;
+}
+
+impl pallet_frontendstore::Config for Runtime {
+	type Event = Event;
+}
+
+parameter_types! {
+	pub storage MaxInvoiceAge: u32 = 5000;
+	pub storage MaxInvoiceSize: u32 = 1024 * 200;
+}
+
+impl pallet_invoicebook::Config for Runtime {
+	type MaxInvoiceSize = MaxInvoiceSize;
+	type MaxInvoiceAge = MaxInvoiceAge;
+	type DisputeHandler = DepositDispute;
+	type Balance = Balance;
+	type IdType = u64;
 	type Event = Event;
 }
 
@@ -491,8 +532,12 @@ construct_runtime!(
 		CumulusXcm: cumulus_pallet_xcm::{Pallet, Event<T>, Origin} = 32,
 		DmpQueue: cumulus_pallet_dmp_queue::{Pallet, Call, Storage, Event<T>} = 33,
 
-		// Template
-		TemplatePallet: pallet_template::{Pallet, Call, Storage, Event<T>}  = 40,
+		// Local Pallets
+		DepositDispute: pallet_depositdispute::{Pallet, Call, Storage, Event<T>}  = 40,
+		DexGraph: pallet_dexgraph::{Pallet, Call, Storage, Event<T>}  = 41,
+		DexMint: pallet_dexmint::{Pallet, Call, Storage, Event<T>}  = 42,
+		FrontendStore: pallet_frontendstore::{Pallet, Call, Storage, Event<T>}  = 43,
+		InvoiceBook: pallet_invoicebook::{Pallet, Call, Storage, Event<T>}  = 44,
 	}
 );
 
