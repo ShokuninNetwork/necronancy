@@ -22,6 +22,8 @@ Below is the *idea* of the pallets we want(ed) to implement - they are liable to
 
 (0% Completed) `pallet-dexgraph` - provides data to the frontend required to calculate a route between LPs in order to execute a given trade, accepts routes from the frontend to execute a trade.
 
+A *wip, mock* UI is available in `./web/`
+
 # Substrate Cumulus Parachain Template
 
 A new [Cumulus](https://github.com/paritytech/cumulus/)-based Substrate node, ready for hacking ☁️..
